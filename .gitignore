@@ -3,7 +3,7 @@
 *.wav
 *.mp4
 *.pcm
-*.yaml
+# *.yaml
 data
 data/
 exps/
