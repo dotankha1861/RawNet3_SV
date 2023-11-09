@@ -225,7 +225,7 @@ class ModelTrainer(object):
                     telapsed = time.time() - tstart
                     sys.stdout.write("\rComputing {:d} of {:d}: {:.2f} Hz".format(idx, len(lines), idx / telapsed))
                     sys.stdout.flush()
-        print(all_scores)
+
         return (all_scores, all_labels, all_trials)
 
     ## ===== ===== ===== ===== ===== ===== ===== =====
