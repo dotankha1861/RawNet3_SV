@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy, sys, random
 import time, itertools, importlib
-
+import numpy as np
 from DatasetLoader import test_dataset_loader
 from torch.cuda.amp import autocast, GradScaler
 
@@ -217,7 +217,7 @@ class ModelTrainer(object):
 
                 score = torch.sum(ref_feat * com_feat, dim=1).cpu().numpy()
 
-                all_scores.append(score)
+                all_scores.append(np.mean(score))
                 all_labels.append(int(data[0]))
                 all_trials.append(data[1] + " " + data[2])
 
