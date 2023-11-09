@@ -184,7 +184,7 @@ def main_worker(gpu, ngpus_per_node, args):
 
         if args.gpu == 0:
 
-            eer, eer_threshold = compute_eer(sc, lab, [1, 0.1])
+            eer, eer_threshold = compute_eer(sc, lab)
 
             fnrs, fprs, thresholds = ComputeErrorRates(sc, lab)
             mindcf, mindcf_threshold = ComputeMinDcf(fnrs, fprs, thresholds, args.dcf_p_target, args.dcf_c_miss, args.dcf_c_fa)
@@ -225,7 +225,7 @@ def main_worker(gpu, ngpus_per_node, args):
 
             if args.gpu == 0:
                 
-                eer, eer_threshold = compute_eer(sc, lab, [1, 0.1])
+                eer, eer_threshold = compute_eer(sc, lab)
 
                 fnrs, fprs, thresholds = ComputeErrorRates(sc, lab)
                 mindcf, threshold = ComputeMinDcf(fnrs, fprs, thresholds, args.dcf_p_target, args.dcf_c_miss, args.dcf_c_fa)
