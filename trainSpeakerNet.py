@@ -228,7 +228,7 @@ def main_worker(gpu, ngpus_per_node, args):
                 eer, eer_threshold = compute_eer(sc, lab)
 
                 fnrs, fprs, thresholds = ComputeErrorRates(sc, lab)
-                mindcf, threshold = ComputeMinDcf(fnrs, fprs, thresholds, args.dcf_p_target, args.dcf_c_miss, args.dcf_c_fa)
+                mindcf, mindcf_threshold = ComputeMinDcf(fnrs, fprs, thresholds, args.dcf_p_target, args.dcf_c_miss, args.dcf_c_fa)
 
                 eers.append(eer)
 
