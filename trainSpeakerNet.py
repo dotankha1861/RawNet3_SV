@@ -60,7 +60,6 @@ parser.add_argument('--dcf_c_fa',       type=float, default=1,      help='Cost o
 
 ## Load and save
 parser.add_argument('--initial_model',  type=str,   default="",     help='Initial model weights')
-parser.add_argument('--epoch',      type=int,   default=1, help='Path for model and logs')
 parser.add_argument('--save_path',      type=str,   default="exps/exp1", help='Path for model and logs')
 
 ## Training and test data
@@ -169,8 +168,7 @@ def main_worker(gpu, ngpus_per_node, args):
         trainer.loadParameters(modelfiles[-1])
         print("Model {} loaded from previous state!".format(modelfiles[-1]))
         it = int(os.path.splitext(os.path.basename(modelfiles[-1]))[0][5:]) + 1
-
-    it = args.epoch    
+           
     for ii in range(1,it):
         trainer.__scheduler__.step()
 
