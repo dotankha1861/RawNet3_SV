@@ -1,5 +1,7 @@
-torch>=1.7.0
-torchaudio>=0.7.0
+antlr4-python3-runtime==4.9.*
+omegaconf>=2.1.1
+torch>=>=1.8.0
+torchaudio>=0.8.0
 asteroid_filterbanks==0.4.0
 numpy
 scipy
@@ -8,4 +10,3 @@ tqdm
 pyyaml
 soundfile
 fairseq
-s3prl

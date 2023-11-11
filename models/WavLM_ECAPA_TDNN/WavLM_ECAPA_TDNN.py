@@ -193,7 +193,6 @@ class ECAPA_TDNN(nn.Module):
                                               melkwargs=melkwargs)
         else:
             if config_path is None:
-                print(feat_type)
                 self.feature_extract = torch.hub.load('s3prl/s3prl', feat_type)
             else:
                 self.feature_extract = UpstreamExpert(config_path)
