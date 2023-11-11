@@ -288,7 +288,7 @@ class ECAPA_TDNN(nn.Module):
 def MainModel(**kwargs):
 
     model = ECAPA_TDNN(
-        feat_dim='1024', emb_dim=kwargs["nOut"], feat_type='wavlm_large', feature_selection="hidden_states", 
+        feat_dim=1024, emb_dim=kwargs["nOut"], feat_type='wavlm_large', feature_selection="hidden_states", 
         update_extract=kwargs['update_extract'], config_path=None
     )
     return model
