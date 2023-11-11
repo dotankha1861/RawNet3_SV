@@ -1,5 +1,4 @@
 model: WavLM_ECAPA_TDNN
-encoder_type: ECA
 nOut: 256
 max_frames: 300
 batch_size: 32

@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 from asteroid_filterbanks import Encoder, ParamSincFB
 
-from models.RawNetBasicBlock import Bottle2neck, PreEmphasis
+from models.RawNet3.RawNetBasicBlock import Bottle2neck, PreEmphasis
 
 
 class RawNet3(nn.Module):
