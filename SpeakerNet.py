@@ -27,7 +27,7 @@ class SpeakerNet(nn.Module):
     def __init__(self, model, optimizer, trainfunc, nPerSpeaker, **kwargs):
         super(SpeakerNet, self).__init__()
 
-        SpeakerNetModel = importlib.import_module("models." + model).__getattribute__("MainModel")
+        SpeakerNetModel = importlib.import_module("models." + model + '.' + model).__getattribute__("MainModel")
         self.__S__ = SpeakerNetModel(**kwargs)
 
         LossFunction = importlib.import_module("loss." + trainfunc).__getattribute__("LossFunction")

@@ -1,0 +1,14 @@
+model: WavLM_ECAPA_TDNN
+encoder_type: ECA
+nOut: 256
+max_frames: 300
+batch_size: 32
+eval_frames: 400
+trainfunc: aamsoftmax
+optimizer: sgd
+lr: 0.01
+lr_decay: 0.99
+weight_decay: 2e-05
+max_seg_per_spk: 500
+augment: True
+save_path: exps/WavLM_ECAPA_TDNN_AAM
