@@ -291,4 +291,7 @@ def MainModel(**kwargs):
         feat_dim=1024, emb_dim=kwargs["nOut"], feat_type='wavlm_large', feature_selection="hidden_states", 
         update_extract=kwargs['update_extract'], config_path=None
     )
+    if kwargs['checkpoint_eca'] != "":
+            state_dict = torch.load(kwargs['checkpoint_eca'], map_location=lambda storage, loc: storage)
+            model.load_state_dict(state_dict['model'], strict=False)
     return model

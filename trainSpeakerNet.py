@@ -60,6 +60,7 @@ parser.add_argument('--dcf_c_fa',       type=float, default=1,      help='Cost o
 
 ## Load and save
 parser.add_argument('--initial_model',  type=str,   default="",     help='Initial model weights')
+parser.add_argument('--checkpoint_eca',  type=str,   default="",     help='Initial checkpoint_eca for wavLM ecapa-tdnn')
 parser.add_argument('--save_path',      type=str,   default="exps/exp1", help='Path for model and logs')
 
 ## Training and test data
