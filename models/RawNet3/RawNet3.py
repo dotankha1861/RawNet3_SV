@@ -69,6 +69,12 @@ class RawNet3(nn.Module):
 
         self.mp3 = nn.MaxPool1d(3)
 
+        if kwargs["n_dense"] > 0:
+            list_dense = [nn.Linear(256, 256)] * kwargs["n_dense"]
+            self.new_component = nn.Sequential(
+                *list_dense
+            )
+
     def forward(self, x):
         """
         :param x: input mini-batch (bs, samp)
@@ -132,6 +138,8 @@ class RawNet3(nn.Module):
 
         if self.out_bn:
             x = self.bn6(x)
+
+        
 
         return x
 
