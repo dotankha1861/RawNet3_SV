@@ -162,7 +162,7 @@ class AttentiveStatsPool(nn.Module):
 
 class ECAPA_TDNN(nn.Module):
     def __init__(self, feat_dim=80, channels=512, emb_dim=192, global_context_att=False,
-                 feat_type='fbank', sr=16000, feature_selection="hidden_states", update_extract=False, config_path=None):
+                 feat_type='fbank', sr=16000, feature_selection="hidden_states", update_extract=False, config_path=None, n_dense=0):
         super().__init__()
 
         self.feat_type = feat_type
@@ -232,6 +232,12 @@ class ECAPA_TDNN(nn.Module):
         self.bn = nn.BatchNorm1d(self.channels[-1] * 2)
         self.linear = nn.Linear(self.channels[-1] * 2, emb_dim)
 
+        if n_dense > 0:
+            list_dense = [nn.Linear(256, 256)] * n_dense
+            self.new_component = nn.Sequential(
+                *list_dense
+            )
+
 
     def get_feat_num(self):
         self.feature_extract.eval()
@@ -289,7 +295,7 @@ def MainModel(**kwargs):
 
     model = ECAPA_TDNN(
         feat_dim=1024, emb_dim=kwargs["nOut"], feat_type='wavlm_large', feature_selection="hidden_states", 
-        update_extract=kwargs['update_extract'], config_path=None
+        update_extract=kwargs['update_extract'], config_path=None, n_dense=kwargs['n_dense']
     )
     if kwargs['checkpoint_eca'] != "":
             state_dict = torch.load(kwargs['checkpoint_eca'], map_location=lambda storage, loc: storage)
