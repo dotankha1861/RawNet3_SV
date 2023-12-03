@@ -80,6 +80,7 @@ parser.add_argument('--encoder_type',   type=str,   default="SAP",  help='Type o
 parser.add_argument('--update_extract',   type=bool,   default=False,  help='Update extract for WavLM')
 parser.add_argument('--nOut',           type=int,   default=512,    help='Embedding size in the last FC layer')
 parser.add_argument('--sinc_stride',    type=int,   default=10,    help='Stride size of the first analytic filterbank layer of RawNet3')
+parser.add_argument('--free_model',    type=bool,   default=False,    help='')
 
 ## For test only
 parser.add_argument('--eval',           dest='eval', action='store_true', help='Eval only')

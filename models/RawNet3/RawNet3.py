@@ -149,4 +149,9 @@ def MainModel(**kwargs):
     model = RawNet3(
         Bottle2neck, model_scale=8, context=True, summed=True, out_bn=False, log_sinc=True, norm_sinc="mean", grad_mult=1, **kwargs
     )
+    if kwargs['freeze_model'] == True:
+        for param in model.parameters():
+            param.requires_grad = False
+        for param in model.new_component.parameters():
+            param.requires_grad = True
     return model

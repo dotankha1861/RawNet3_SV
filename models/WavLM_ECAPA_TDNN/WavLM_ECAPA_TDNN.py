@@ -300,4 +300,11 @@ def MainModel(**kwargs):
     if kwargs['checkpoint_eca'] != "":
             state_dict = torch.load(kwargs['checkpoint_eca'], map_location=lambda storage, loc: storage)
             model.load_state_dict(state_dict['model'], strict=False)
+
+    if kwargs['freeze_model'] == True:
+        for param in model.parameters():
+            param.requires_grad = False
+        for param in model.new_component.parameters():
+            param.requires_grad = True
+            
     return model
