@@ -14,6 +14,7 @@ from SpeakerNet import *
 from DatasetLoader import *
 import torch.distributed as dist
 import torch.multiprocessing as mp
+from threshold import plot_result_cosine_sim
 warnings.simplefilter("ignore")
 
 ## ===== ===== ===== ===== ===== ===== ===== =====
@@ -185,6 +186,7 @@ def main_worker(gpu, ngpus_per_node, args):
         print('Test list',args.test_list)
         
         sc, lab, _ = trainer.evaluateFromList(**vars(args))
+        plot_result_cosine_sim(sc, list(map(lambda l: float(l), lab)))
 
         if args.gpu == 0:
 

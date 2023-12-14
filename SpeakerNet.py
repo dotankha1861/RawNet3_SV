@@ -216,7 +216,6 @@ class ModelTrainer(object):
                     com_feat = F.normalize(com_feat, p=2, dim=1)
 
                 score = torch.sum(ref_feat * com_feat, dim=1).cpu().numpy()
-
                 all_scores.append(np.mean(score))
                 all_labels.append(int(data[0]))
                 all_trials.append(data[1] + " " + data[2])
