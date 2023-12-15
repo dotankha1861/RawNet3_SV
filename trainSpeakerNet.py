@@ -188,14 +188,14 @@ def main_worker(gpu, ngpus_per_node, args):
         sc, lab, _ = trainer.evaluateFromList(**vars(args))
         plot_result_cosine_sim(sc, list(map(lambda l: float(l), lab)))
 
-        if args.gpu == 0:
+        # if args.gpu == 0:
 
-            eer, eer_threshold = compute_eer(sc, lab)
+        #     eer, eer_threshold = compute_eer(sc, lab)
 
-            fnrs, fprs, thresholds = ComputeErrorRates(sc, lab)
-            mindcf, mindcf_threshold = ComputeMinDcf(fnrs, fprs, thresholds, args.dcf_p_target, args.dcf_c_miss, args.dcf_c_fa)
+        #     fnrs, fprs, thresholds = ComputeErrorRates(sc, lab)
+        #     mindcf, mindcf_threshold = ComputeMinDcf(fnrs, fprs, thresholds, args.dcf_p_target, args.dcf_c_miss, args.dcf_c_fa)
 
-            print('\n',time.strftime("%Y-%m-%d %H:%M:%S"), "VEER {:2.4f}".format(eer),"EER-thres {:2.3f}".format(eer_threshold), "MinDCF {:2.5f}".format(mindcf), "MinDCF-thres {:2.3f}".format(mindcf_threshold) )
+        #     print('\n',time.strftime("%Y-%m-%d %H:%M:%S"), "VEER {:2.4f}".format(eer),"EER-thres {:2.3f}".format(eer_threshold), "MinDCF {:2.5f}".format(mindcf), "MinDCF-thres {:2.3f}".format(mindcf_threshold) )
 
         return
 
