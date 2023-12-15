@@ -5,6 +5,7 @@ import numpy as np
 # Giả sử bạn đã có một danh sách các giá trị sim cosine và nhãn tương ứng
 # Đây chỉ là ví dụ, bạn cần thay thế nó bằng dữ liệu thực tế của mình.
 def plot_result_cosine_sim(similarities, labels, pos_label = 1, neg_label = 0):
+    print("PLot:")
     # Phân loại các giá trị sim cosine theo nhãn
     same_speaker = [similarity for similarity, label in zip(similarities, labels) if label == pos_label]
     different_speaker = [similarity for similarity, label in zip(similarities, labels) if label == neg_label]
@@ -22,3 +23,8 @@ def plot_result_cosine_sim(similarities, labels, pos_label = 1, neg_label = 0):
 
     # Hiển thị biểu đồ
     plt.show()
+
+if __name__ == '__main__':
+    x = np.array([1,2,3])
+    x = np.mean(x)
+    print(type(float(x)))
