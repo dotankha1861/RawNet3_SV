@@ -193,8 +193,7 @@ def main_worker(gpu, ngpus_per_node, args):
         different_speaker = [similarity for similarity, label in zip(similarities, labels) if label == 0]
 
         print(labels)
-        print(same_speaker)
-        print(different_speaker)
+        print(similarities)
         # Vẽ biểu đồ
         plt.hist(same_speaker, bins=20, alpha=0.5, label='Same Speaker')
         plt.hist(different_speaker, bins=20, alpha=0.5, label='Different Speaker')
@@ -217,7 +216,6 @@ def main_worker(gpu, ngpus_per_node, args):
 
             print('\n',time.strftime("%Y-%m-%d %H:%M:%S"), "VEER {:2.4f}".format(eer),"EER-thres {:2.3f}".format(eer_threshold), "MinDCF {:2.5f}".format(mindcf), "MinDCF-thres {:2.3f}".format(mindcf_threshold) )
         
-        input()
         return
 
     ## Save training code and params
