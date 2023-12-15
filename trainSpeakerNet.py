@@ -64,6 +64,8 @@ parser.add_argument('--dcf_c_fa',       type=float, default=1,      help='Cost o
 parser.add_argument('--initial_model',  type=str,   default="",     help='Initial model weights')
 parser.add_argument('--checkpoint_eca',  type=str,   default="",     help='Initial checkpoint_eca for wavLM ecapa-tdnn')
 parser.add_argument('--save_path',      type=str,   default="exps/exp1", help='Path for model and logs')
+parser.add_argument('--save_label_eval',      type=str,   default="", help='Path for model and logs')
+parser.add_argument('--save_score_eval',      type=str,   default="", help='Path for model and logs')
 
 ## Training and test data
 parser.add_argument('--train_list',     type=str,   default="data/train_list.txt",  help='Train list')
@@ -187,26 +189,16 @@ def main_worker(gpu, ngpus_per_node, args):
         
         sc, lab, _ = trainer.evaluateFromList(**vars(args))
 
-        similarities = sc
-        labels = list(map(lambda l: float(l), lab))
-        same_speaker = [similarity for similarity, label in zip(similarities, labels) if label == 1]
-        different_speaker = [similarity for similarity, label in zip(similarities, labels) if label == 0]
-
-        print(labels)
-        print(similarities)
-        # Vẽ biểu đồ
-        plt.hist(same_speaker, bins=20, alpha=0.5, label='Same Speaker')
-        plt.hist(different_speaker, bins=20, alpha=0.5, label='Different Speaker')
-
-        # Đặt nhãn và tiêu đề cho biểu đồ
-        plt.xlabel('Cosine Similarity')
-        plt.ylabel('Frequency')
-        plt.title('Speaker Verification Test')
-        plt.legend()
-        plt.tight_layout()
-
-        # Hiển thị biểu đồ
-        plt.show()
+        if args.save_label_eval != "":
+            with open(args.save_label_eval, 'w') as f:
+                for s in sc:
+                    f.write(str(float(s)) + "\n")
+        
+        if args.save_score_eval != "":
+            with open(args.save_score_eval, 'w') as f:
+                for l in lab:
+                    f.write(str(int(l)) + "\n")
+        
         if args.gpu == 0:
 
             eer, eer_threshold = compute_eer(sc, lab)
