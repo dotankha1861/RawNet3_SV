@@ -192,6 +192,8 @@ def main_worker(gpu, ngpus_per_node, args):
         same_speaker = [similarity for similarity, label in zip(similarities, labels) if label == 1]
         different_speaker = [similarity for similarity, label in zip(similarities, labels) if label == 0]
 
+        print(same_speaker)
+        print(different_speaker)
         # Vẽ biểu đồ
         plt.hist(same_speaker, bins=20, alpha=0.5, label='Same Speaker')
         plt.hist(different_speaker, bins=20, alpha=0.5, label='Different Speaker')

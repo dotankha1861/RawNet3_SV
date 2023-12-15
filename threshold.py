@@ -25,6 +25,14 @@ def plot_result_cosine_sim(similarities, labels, pos_label = 1, neg_label = 0):
     plt.show()
 
 if __name__ == '__main__':
-    x = np.array([1,2,3])
-    x = np.mean(x)
-    print(type(float(x)))
+    def main(): 
+        x = [1, 2, 3, 4, 5]
+        y = [10, 20, 15, 25, 30]
+
+        plt.plot(x, y)
+        plt.xlabel('X-axis label')
+        plt.ylabel('Y-axis label')
+        plt.title('Simple Line Chart')
+        plt.show()
+        return
+    main()
