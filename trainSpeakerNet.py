@@ -213,7 +213,8 @@ def main_worker(gpu, ngpus_per_node, args):
             mindcf, mindcf_threshold = ComputeMinDcf(fnrs, fprs, thresholds, args.dcf_p_target, args.dcf_c_miss, args.dcf_c_fa)
 
             print('\n',time.strftime("%Y-%m-%d %H:%M:%S"), "VEER {:2.4f}".format(eer),"EER-thres {:2.3f}".format(eer_threshold), "MinDCF {:2.5f}".format(mindcf), "MinDCF-thres {:2.3f}".format(mindcf_threshold) )
-
+        
+        input()
         return
 
     ## Save training code and params
