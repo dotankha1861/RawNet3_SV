@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
-
+import matplotlib.pyplot as plt
 import sys, time, os, argparse
 import yaml
 import numpy
@@ -186,16 +186,33 @@ def main_worker(gpu, ngpus_per_node, args):
         print('Test list',args.test_list)
         
         sc, lab, _ = trainer.evaluateFromList(**vars(args))
-        plot_result_cosine_sim(sc, list(map(lambda l: float(l), lab)))
 
-        # if args.gpu == 0:
+        similarities = sc
+        labels = list(map(lambda l: float(l), lab))
+        same_speaker = [similarity for similarity, label in zip(similarities, labels) if label == 1]
+        different_speaker = [similarity for similarity, label in zip(similarities, labels) if label == 0]
 
-        #     eer, eer_threshold = compute_eer(sc, lab)
+        # Vẽ biểu đồ
+        plt.hist(same_speaker, bins=20, alpha=0.5, label='Same Speaker')
+        plt.hist(different_speaker, bins=20, alpha=0.5, label='Different Speaker')
 
-        #     fnrs, fprs, thresholds = ComputeErrorRates(sc, lab)
-        #     mindcf, mindcf_threshold = ComputeMinDcf(fnrs, fprs, thresholds, args.dcf_p_target, args.dcf_c_miss, args.dcf_c_fa)
+        # Đặt nhãn và tiêu đề cho biểu đồ
+        plt.xlabel('Cosine Similarity')
+        plt.ylabel('Frequency')
+        plt.title('Speaker Verification Test')
+        plt.legend()
+        plt.tight_layout()
 
-        #     print('\n',time.strftime("%Y-%m-%d %H:%M:%S"), "VEER {:2.4f}".format(eer),"EER-thres {:2.3f}".format(eer_threshold), "MinDCF {:2.5f}".format(mindcf), "MinDCF-thres {:2.3f}".format(mindcf_threshold) )
+        # Hiển thị biểu đồ
+        plt.show()
+        if args.gpu == 0:
+
+            eer, eer_threshold = compute_eer(sc, lab)
+
+            fnrs, fprs, thresholds = ComputeErrorRates(sc, lab)
+            mindcf, mindcf_threshold = ComputeMinDcf(fnrs, fprs, thresholds, args.dcf_p_target, args.dcf_c_miss, args.dcf_c_fa)
+
+            print('\n',time.strftime("%Y-%m-%d %H:%M:%S"), "VEER {:2.4f}".format(eer),"EER-thres {:2.3f}".format(eer_threshold), "MinDCF {:2.5f}".format(mindcf), "MinDCF-thres {:2.3f}".format(mindcf_threshold) )
 
         return
 
